@@ -66,6 +66,7 @@ class ProductController {
         price,
       });
       await product.save();
+    res.status(200).json(product);
     } catch (error) {
       next(ApiError.InternalError("create products error"));
     }

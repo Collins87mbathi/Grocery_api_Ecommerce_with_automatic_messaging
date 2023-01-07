@@ -3,6 +3,6 @@ import {Document} from "mongoose"
 export interface IProduct extends Document {
     title:string,
     category:string,
-    img:Object,
+    img:string,
     price:string
 }
