@@ -11,7 +11,8 @@ const OrderSchema:Schema<IOrder> = new Schema({
         required:true
      },
      date: {
-      type:Date
+      type:Date,
+      default:new Date()
      },
      amount: {
       type:String,
@@ -35,4 +36,4 @@ const OrderSchema:Schema<IOrder> = new Schema({
 });
 
 
-export const Products:Model<IOrder> = model("Products",OrderSchema);
+export const Orders:Model<IOrder> = model("Orders",OrderSchema);

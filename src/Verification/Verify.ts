@@ -1,24 +1,28 @@
 import jwt from "jsonwebtoken";
-import {IReq,IRes,INext} from "../common/index";
-import {JwtPayload} from "../Helpers/jwt";
-import {secretKey} from "../config/index"
+import dotenv from "dotenv";
+import { secretKey } from "../config";
+import { INext, IReq, IRes } from "../common";
 import { ApiError } from "../Errors/Errors";
+import { JwtPayload } from "../Helpers/jwt";
+dotenv.config();
 
-class Verify {
-    public static Verification = (req:IReq,res:IRes,next:INext) => {
+class Auth {
+    public static Required = async (req:IReq,res:IRes,next:INext) => {
     try {
-        const authorization = req.headers.authorization;
-        if(!authorization) return next(ApiError.Required("authorization is required"));
-        const token = authorization.split(' ')[1];
-        if(!token) return next(ApiError.Required("token is required"))
-        jwt.verify(token,secretKey,(err:any,user:any) => {
-        if(err) return res.status(402).json("invalid token");
-        req.user = user as JwtPayload
-        })
+     const authorization = req.headers.authorization;
+     if(!authorization) return next(ApiError.NotFound("authorization is required"));
+     const token = authorization.split(' ')[1];
+     if(!token) return next(ApiError.NotFound("token is required"));
+     jwt.verify(token,secretKey, (err:any, user:any)=>{
+     if(err) return res.status(402).json("invalid token");
+     req.user = user as JwtPayload
+     next();
+     })
     } catch (error) {
-        next(ApiError.BadRequest("verification error"))
+        return next(ApiError.InternalError("internal server error"));
+    } 
     }
-    }
-}
+};
 
-export const {Verification} = Verify;
+
+export const { Required } = Auth;

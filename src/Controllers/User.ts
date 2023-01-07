@@ -36,7 +36,7 @@ class UserController {
       if (!user) return next(ApiError.NotFound("This user does not exist"));
       const isMatch: boolean = await user.matchPassword(req.body.password);
       if (!isMatch) return res.status(404).json("please input password");
-      const token = jwt.sign({ id: user._id, email: user.email }, secretKey);
+      const token = jwt.sign({id:user._id,email:user.email}, secretKey);
       const { password, ...otherDetails } = user._doc;
       res.status(200).json({ user: { ...otherDetails, token } });
     } catch (error) {

@@ -17,6 +17,7 @@ CONNECTDB(mongoUrl);
 //router 
 app.use('/api/auth',require("./router/User"));
 app.use('/api/products',require("./router/Products"));
+app.use('/api/orders',require("./router/Order"));
 app.use('/api/upload',require("./router/upload"));
 
 //Error Handler
