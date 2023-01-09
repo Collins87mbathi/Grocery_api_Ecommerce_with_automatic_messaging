@@ -18,8 +18,13 @@ class AddressController {
             street,
           });
           await address.save();
-        const user = await User.findById(req.user.id);
-       await user?.address.push(address);
+        try {
+          await User.findByIdAndUpdate(req.user.id, {
+            $push: { address:address },
+          });  
+        } catch (error) {
+          next(ApiError.BadRequest("push of address to user error"))
+        }
         res.status(200).json(address);
         } catch (error) {
           next(ApiError.InternalError("create address error"));

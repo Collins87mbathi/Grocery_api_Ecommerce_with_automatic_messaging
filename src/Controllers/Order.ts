@@ -2,6 +2,7 @@ import { INext, IReq, IRes } from "../common";
 import { ApiError } from "../Errors/Errors";
 import {Orders} from "../Models/Orders";
 import { v4 as uuid_v4 } from "uuid";
+import { User } from "../Models/User";
 
 
 class ProductController {
@@ -18,6 +19,13 @@ class ProductController {
           products,
         });
         await order.save();
+        try {
+          await User.findByIdAndUpdate(req.user.id, {
+            $push: {orders:order},
+          });  
+        } catch (error) {
+          next(ApiError.BadRequest("Error when pushing orders"))         
+        }
       res.status(200).json(order);
       } catch (error) {
         next(ApiError.InternalError("create products error"));
