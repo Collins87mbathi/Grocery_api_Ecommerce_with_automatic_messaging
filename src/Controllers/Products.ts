@@ -54,7 +54,7 @@ class APIfeatures {
 class ProductController {
   public static CreateProduct = async (req: IReq, res: IRes, next: INext) => {
     try {
-      const { title, category, img, price } = req.body;
+      const { title, category,size, img, price } = req.body;
       if (!title || !category || !price)
         return next(ApiError.NotFound("please input values"));
 
@@ -64,6 +64,7 @@ class ProductController {
         category,
         img,
         price,
+        size,
       });
       await product.save();
     res.status(200).json(product);

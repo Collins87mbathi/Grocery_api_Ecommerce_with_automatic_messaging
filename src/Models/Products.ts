@@ -15,6 +15,10 @@ const ProductSchema:Schema<IProduct> = new Schema({
       required:true
      },
      price: {
+      type:Number,
+      required:true
+     },
+     size: {
       type:String,
       required:true
      }
