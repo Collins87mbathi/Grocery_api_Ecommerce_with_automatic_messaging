@@ -95,6 +95,15 @@ class ProductController {
     }
   };
 
+  public static FindProductAll = async (req: IReq, res: IRes, next: INext) => {
+    try {
+      const products = await Products.find();
+      res.status(200).json(products);
+    } catch (error) {
+      next(ApiError.InternalError("finding products"));
+    }
+  };
+
   public static getProduct = async (req: IReq, res: IRes) => {
     try {
       const product = await Products.findById(req.params.id);
@@ -125,4 +134,4 @@ class ProductController {
   };
 }
 
-export const {CreateProduct,getProduct,DeleteProduct,updateProducts,FindProducts} = ProductController 
+export const {CreateProduct,getProduct,DeleteProduct,updateProducts,FindProducts,FindProductAll} = ProductController 
