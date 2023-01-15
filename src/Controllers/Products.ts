@@ -97,7 +97,10 @@ class ProductController {
 
   public static FindProductAll = async (req: IReq, res: IRes, next: INext) => {
     try {
-      const products = await Products.find();
+      const products = await Products.find({
+        category:req.query.category,
+        title:req.query.title
+      });
       res.status(200).json(products);
     } catch (error) {
       next(ApiError.InternalError("finding products"));
