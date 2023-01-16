@@ -1,7 +1,14 @@
+import { type } from "os";
 import { nextTick } from "process";
 import { INext, IReq, IRes } from "../common";
 import { ApiError } from "../Errors/Errors";
 import { Products } from "../Models/Products";
+
+
+interface Ioptions {
+  category:any,
+  title:any,
+}
 
 class APIfeatures {
   query: any;
@@ -99,15 +106,25 @@ class ProductController {
     try {
     let category = req.query.category;
     let title = req.query.title;
-    let options = {
-      category,
-      title
-    };
-
-    if(category) options.category = category;
-    if(title) options.title = title;
-
-      const products = await Products.find(options);
+    let products;
+    
+    if(category) {
+      products = await Products.find({
+        category:category,
+      });
+    } else if(title) {
+      products = await Products.find({
+        title:title,
+      });
+    }else if(title && category) {
+      products = await Products.find({
+        title:title,
+        category:category
+      });
+    } else {
+      products = await Products.find();
+    }
+      
       res.status(200).json(products);
     } catch (error) {
       next(ApiError.InternalError("finding products"));
