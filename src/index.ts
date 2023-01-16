@@ -21,6 +21,7 @@ app.use('/api/orders',require("./router/Order"));
 app.use('/api/address',require("./router/Address"));
 app.use('/api/upload',require("./router/upload"));
 app.use('/api/category',require("./router/Category"));
+app.use('/api/sendmail',require("./router/Mail"));
 app.get('/', (req,res)=>{
  res.send("the grocery api");
 });

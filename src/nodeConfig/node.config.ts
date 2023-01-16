@@ -10,6 +10,8 @@ export const nodeConfig = {
 	    cloud_name: "mbathi",   
         api_key: "977179525928855",
         api_secret: "P5I6ukSyTe0u7Dcb_pJPhf-Bmv8",
+		user:"interwoodkraftinteriors35@gmail.com",
+		pass:"xdhnpskxkrvqgyqc"
 	
 	
 	
