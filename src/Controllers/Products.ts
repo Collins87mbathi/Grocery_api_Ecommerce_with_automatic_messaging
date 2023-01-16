@@ -99,10 +99,13 @@ class ProductController {
     try {
     let category = req.query.category;
     let title = req.query.title;
-    let options = {};
+    let options = {
+      category,
+      title
+    };
 
-    if(category) options = category;
-    if(title) options = title;
+    if(category) options.category = category;
+    if(title) options.title = title;
 
       const products = await Products.find(options);
       res.status(200).json(products);
