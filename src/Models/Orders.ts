@@ -30,6 +30,10 @@ const OrderSchema:Schema<IOrder> = new Schema({
     type:Boolean,
     default:false
     },
+    isComplete: {
+        type:Boolean,
+        default:false
+        },
     products:[{
         type:Array
        }]

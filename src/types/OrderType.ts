@@ -9,5 +9,6 @@ export interface IOrder extends Document {
     paymentMethod:string,
     isDelivered:Boolean,
     isPaid:Boolean,
+    isComplete:Boolean,
     products:Array<IProduct>
 }

@@ -2,7 +2,7 @@ import { INext, IReq, IRes } from "../common";
  {/*@ts-ignore */}
 import nodemailer from "nodemailer";
 import {user,pass} from "../config/index";
-
+import { Orders } from "../Models/Orders";
 
 
 
@@ -25,7 +25,7 @@ class EmailController {
         <p>Hello there, Thanks for shopping with us your order id is:${req.body.orderId} will be delivered in a few, thanks for your patience.</p>
          </div>`
      }
-
+     await Orders.updateOne({  orderId:req.body.orderId }, { isComplete: true})
     await transporter.sendMail(mailOptions, (error:any, info:any) => {
       if(error) {
         console.log(error);
