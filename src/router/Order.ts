@@ -9,7 +9,7 @@ router.get('/',FindOrders);
 router.delete('/:id',DeleteOrder);
 router.put('/:id',updateOrders);
 router.get(':/id',getOrder);
-router.get('/single',FindOneOrder);
+router.get('/single',Required,FindOneOrder);
 
 
 module.exports = router;
