@@ -50,6 +50,14 @@ class ProductController {
       }
     };
   
+    public static FindOneOrder = async (req:IReq,res:IRes,next:INext) => {
+       try {
+        const order = await Orders.find({userId:req.user.id})
+        res.status(200).json(order);
+       } catch (error) {
+        next(ApiError.InternalError("finding one order error"))
+       }
+    };
     public static getOrder = async (req: IReq, res: IRes) => {
       try {
         const order = await Orders.findById(req.params.id);
@@ -79,4 +87,4 @@ class ProductController {
     };
   }
   
-  export const {CreateOrder,getOrder,DeleteOrder,updateOrders,FindOrders} = ProductController 
+  export const {CreateOrder,getOrder,DeleteOrder,updateOrders,FindOrders,FindOneOrder} = ProductController 
