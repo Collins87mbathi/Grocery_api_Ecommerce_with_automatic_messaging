@@ -4,8 +4,8 @@ import {initiateSTKPush,stkPushCallback,confirmPayment} from "../Controllers/Pay
 import {accessToken} from "../utils/auth";
 
 router.post('/stkPush',accessToken,initiateSTKPush);
-router.post('/payment/:orderId',stkPushCallback);
-router.post('/confirmPayment/:CheckoutRequestID',accessToken,confirmPayment);
+router.post('/:orderId',stkPushCallback);
+router.post('/:CheckoutRequestID',accessToken,confirmPayment);
 
 
 module.exports = router;

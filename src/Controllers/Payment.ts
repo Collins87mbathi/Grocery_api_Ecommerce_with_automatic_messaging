@@ -24,7 +24,7 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
         const password = new Buffer.from(shortcode + passkey + timestamp).toString('base64')
 
         // create callback url
-        const callback_url = "http://localhost:3000"
+        const callback_url = "https://perezgrabs.azurewebsites.net/api"
 
 
         console.log("callback ",callback_url)
