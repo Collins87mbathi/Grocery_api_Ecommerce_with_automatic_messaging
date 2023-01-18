@@ -8,8 +8,12 @@ const {env:{
     api_key,
     api_secret,
     user,
-    pass
+    pass,
+    consumerkey,
+    consumersecret,
+    shortcode,
+    passkey
 }} = nodeConfig;
 
 
-export {port,secretKey,mongoUrl,cloud_name,api_key,api_secret,user,pass};
+export {port,secretKey,mongoUrl,shortcode,consumerkey,consumersecret,passkey,cloud_name,api_key,api_secret,user,pass};

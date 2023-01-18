@@ -11,7 +11,11 @@ export const nodeConfig = {
         api_key: "977179525928855",
         api_secret: "P5I6ukSyTe0u7Dcb_pJPhf-Bmv8",
 		user:"interwoodkraftinteriors35@gmail.com",
-		pass:"xdhnpskxkrvqgyqc"
+		pass:"xdhnpskxkrvqgyqc",
+		consumersecret:"eEP2ubePMDb92kay",
+		consumerkey:"lgoJM3QhPJhwMc1ohvLkA5XWLlBQUqBN",
+		passkey:"bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919",
+		shortcode:"174379"
 	
 	
 	
