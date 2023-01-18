@@ -4,6 +4,7 @@ import {getTimestamp} from "../utils/timestamp";
 import { Payment } from "../Models/Payment";
 import { IReq, IRes } from "../common";
 import {passkey, shortcode} from "../config/index";
+import { Orders } from "../Models/Orders";
 
 // @desc initiate stk push
 // @method POST
@@ -114,6 +115,7 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
             TransactionDate 
         });
       await onlinePayment.save();
+      await Orders.updateOne({  orderId:orderId }, { isPaid: true})
         res.json(true)
     }catch (e:any) {
         console.error("Error while trying to update LipaNaMpesa details from the callback",e)
