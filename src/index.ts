@@ -11,6 +11,11 @@ app.use(express.json());
 app.use(cors({origin:'*'}));
 app.use(helmet());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 //database connection
 CONNECTDB(mongoUrl);
 
