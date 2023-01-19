@@ -36,14 +36,14 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
                     "Authorization": auth
                 },
                 json: {
-                    "BusinessShortCode": shortcode,
+                    "BusinessShortCode": parseInt(shortcode),
                     "Password": password,
                     "Timestamp": timestamp,
                     "TransactionType": "CustomerPayBillOnline",
-                    "Amount": amount,
-                    "PartyA": phone,
-                    "PartyB": shortcode,
-                    "PhoneNumber": phone,
+                    "Amount": parseInt(amount),
+                    "PartyA": parseInt(phone),
+                    "PartyB": parseInt(shortcode),
+                    "PhoneNumber": parseInt(phone),
                     "CallBackURL": `${callback_url}/payment/${orderId}`,
                     "AccountReference": "Perez Grocery Shop",
                     "TransactionDesc": "Online Payment"
@@ -52,7 +52,7 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
             function (e:any, response:any, body:any) {
                 if (e) {
                     console.error(e)
-                    res.status(503).send({
+                    res.status(502).send({
                         message:"Error with the stk push",
                         error : e
                     })
@@ -151,7 +151,7 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
                     "Authorization": auth
                 },
                 json: {
-                    "BusinessShortCode":shortcode,
+                    "BusinessShortCode": parseInt(shortcode),
                     "Password": password,
                     "Timestamp": timestamp,
                     "CheckoutRequestID": req.params.CheckoutRequestID,
