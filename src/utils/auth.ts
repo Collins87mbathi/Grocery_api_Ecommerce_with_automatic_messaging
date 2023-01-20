@@ -1,9 +1,7 @@
 import { INext, IReq, IRes } from "../common";
  {/*@ts-ignore */}
 import request from "request";
-import dotenv from "dotenv"
-dotenv.config();
-
+import { consumerkey,consumersecret } from "../config";
  export const accessToken = (req:IReq, res:IRes, next:INext)=> {
     try{
 
