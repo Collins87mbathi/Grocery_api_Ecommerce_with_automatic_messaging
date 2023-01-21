@@ -36,14 +36,14 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
                     "Authorization": auth
                 },
                 json: {
-                    "BusinessShortCode": parseInt(shortcode),
+                    "BusinessShortCode":shortcode,
                     "Password": password,
                     "Timestamp": timestamp,
                     "TransactionType": "CustomerPayBillOnline",
-                    "Amount": parseInt(amount),
-                    "PartyA": parseInt(phone),
-                    "PartyB": parseInt(shortcode),
-                    "PhoneNumber": parseInt(phone),
+                    "Amount":amount,
+                    "PartyA":phone,
+                    "PartyB": shortcode,
+                    "PhoneNumber":phone,
                     "CallBackURL": `${callback_url}/payment/${orderId}`,
                     "AccountReference": "Perez Grocery Shop",
                     "TransactionDesc": "Online Payment"
