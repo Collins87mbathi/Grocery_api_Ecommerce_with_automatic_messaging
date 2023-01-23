@@ -1,32 +1,32 @@
  {/*@ts-ignore */}
 import request from "request";
+import ngrok from "ngrok";
 import {getTimestamp} from "../utils/timestamp";
 import { Payment } from "../Models/Payment";
 import { IReq, IRes } from "../common";
 import {passkey, shortcode} from "../config/index";
 import { Orders } from "../Models/Orders";
+import { parse } from "path";
 
 // @desc initiate stk push
 // @method POST
 // @route /stkPush
 // @access public
 export const initiateSTKPush = async(req:IReq, res:IRes) => {
+
     try{
 
-        const {amount, phone,orderId} = req.body
+        // const {amount, phone,orderId} = req.body;
         const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
         const auth = "Bearer " + req.safaricom_access_token
 
         const timestamp = getTimestamp()
-
         //shortcode + passkey + timestamp
          {/*@ts-ignore */}
         const password = new Buffer.from(shortcode + passkey + timestamp).toString('base64')
 
         // create callback url
-        const callback_url = "https://perezgrabs.azurewebsites.net/api"
-
-
+        const callback_url ="https://perezgrabs.azurewebsites.net/api"
         console.log("callback ",callback_url)
         request(
             {
@@ -40,11 +40,11 @@ export const initiateSTKPush = async(req:IReq, res:IRes) => {
                     "Password": password,
                     "Timestamp": timestamp,
                     "TransactionType": "CustomerPayBillOnline",
-                    "Amount":amount,
-                    "PartyA":phone,
+                    "Amount":req.body.amount,
+                    "PartyA":req.body.phone,
                     "PartyB": shortcode,
-                    "PhoneNumber":phone,
-                    "CallBackURL": `${callback_url}/payment/${orderId}`,
+                    "PhoneNumber":req.body.phone,
+                    "CallBackURL": `${callback_url}/payment/${req.body.orderId}`,
                     "AccountReference": "Perez Grocery Shop",
                     "TransactionDesc": "Online Payment"
                 }
