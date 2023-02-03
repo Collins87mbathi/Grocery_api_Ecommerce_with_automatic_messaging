@@ -69,17 +69,7 @@ class ProductController {
   
     public static updateOrders = async (req: IReq, res: IRes, next: INext) => {
       try {
-        const { amount, paymentMethod,products} = req.body;
-    
-        await Orders.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            amount,
-            paymentMethod,
-            products,
-          }
-        );
-  
+        await Orders.updateOne({  _id:req.params.id }, { isPaid: true});
         res.status(200).json("order updated");
       } catch (error) {
         next(ApiError.InternalError("update orders"));
